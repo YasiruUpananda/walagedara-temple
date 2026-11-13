@@ -1122,7 +1122,7 @@ h2 {
     gap: 16px;
   }
   .has-notice .public-number {
-    font-size: clamp(88px, 28vw, 220px);
+    font-size: clamp(88px, 32vw, 220px);
   }
   .public-display.has-notice {
     grid-template-rows: minmax(70dvh, auto) minmax(30dvh, auto);
