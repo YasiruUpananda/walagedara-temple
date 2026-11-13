@@ -73,9 +73,12 @@ test("landscape touch tablets show the number alongside temple information and l
   browser,
 }) => {
   for (const viewport of [
+    { width: 800, height: 600 },
+    { width: 1024, height: 550 },
     { width: 1024, height: 768 },
     { width: 1280, height: 800 },
     { width: 1366, height: 1024 },
+    { width: 1600, height: 1000 },
   ]) {
     const context = await browser.newContext({
       viewport,

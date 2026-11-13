@@ -1350,8 +1350,8 @@ h2 {
   }
 }
 
-/* Landscape touch tablets: temple information left, queue number right, notices below. */
-@media (min-width: 900px) and (max-width: 1400px) and (min-height: 600px) and (max-height: 1024px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+/* Include larger tablets, browser toolbars, and touch tablets with a mouse attached. */
+@media (min-width: 768px) and (max-width: 1600px) and (min-height: 500px) and (max-height: 1200px) and (orientation: landscape) and (any-pointer: coarse) {
   .public-display.has-notice {
     grid-template-rows: minmax(0, 62fr) minmax(0, 38fr);
   }
