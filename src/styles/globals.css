@@ -1300,6 +1300,14 @@ h2 {
     margin: 8px 12px;
   }
 }
+/* Larger queue numbers on tablets; exclude short phone landscape screens. */
+@media (min-width: 701px) and (max-width: 1024px) and (min-height: 601px) {
+  .public-number,
+  .has-notice .public-number {
+    font-size: clamp(160px, min(36vw, 36vh), 360px);
+  }
+}
+
 /* Small landscape screens must scroll instead of clipping the logo or Sinhala text. */
 @media (max-height: 600px) and (max-width: 1000px) and (orientation: landscape) {
   .public-display,
