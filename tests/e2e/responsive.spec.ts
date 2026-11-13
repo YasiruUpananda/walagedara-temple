@@ -40,10 +40,23 @@ async function fixtures(page: Page) {
   );
 }
 async function fits(page: Page) {
+  const overflow = await page.evaluate(() =>
+    Array.from(document.querySelectorAll("body *"))
+      .filter((el) => {
+        const r = el.getBoundingClientRect();
+        return r.width > 0 && (r.right > innerWidth + 1 || r.left < -1);
+      })
+      .map((el) => ({
+        tag: el.tagName,
+        class: el.className,
+        width: el.getBoundingClientRect().width,
+      })),
+  );
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth + 1,
     ),
+    JSON.stringify(overflow),
   ).toBe(true);
   const dialog = page.locator("dialog[open]");
   if (await dialog.count()) {
@@ -56,6 +69,60 @@ async function fits(page: Page) {
     expect(box!.height).toBeLessThanOrEqual(page.viewportSize()!.height);
   }
 }
+test("landscape touch tablets show the number alongside temple information and larger notices", async ({
+  browser,
+}) => {
+  for (const viewport of [
+    { width: 1024, height: 768 },
+    { width: 1280, height: 800 },
+    { width: 1366, height: 1024 },
+  ]) {
+    const context = await browser.newContext({
+      viewport,
+      hasTouch: true,
+      isMobile: true,
+    });
+    const page = await context.newPage();
+    await fixtures(page);
+    await page.goto("/");
+    await expect(page.getByText("9999", { exact: true })).toBeVisible();
+    await fits(page);
+    const logo = (await page.locator(".public-logo").boundingBox())!;
+    const number = (await page.locator(".public-number").boundingBox())!;
+    const section = (await page.locator(".number-section").boundingBox())!;
+    const noticeBox = (await page
+      .locator(".temple-notice-section")
+      .boundingBox())!;
+    expect(number.x).toBeGreaterThanOrEqual(logo.x + logo.width);
+    expect(number.y).toBeLessThan(logo.y + logo.height);
+    expect(number.height).toBeGreaterThan(section.height * 0.8);
+    expect(noticeBox.y).toBeGreaterThanOrEqual(section.y + section.height - 1);
+    expect(
+      await page
+        .locator(".public-number")
+        .evaluate((el) => el.scrollWidth <= el.clientWidth + 1),
+    ).toBe(true);
+    expect(
+      await page
+        .locator(".temple-notice-section p")
+        .evaluate((el) => parseFloat(getComputedStyle(el).fontSize)),
+    ).toBeGreaterThanOrEqual(22);
+    await page.screenshot({
+      path: `test-results/tablet-landscape-${viewport.width}.png`,
+      fullPage: false,
+      animations: "disabled",
+    });
+    expect(
+      await page
+        .locator(".number-section")
+        .evaluate((el) => getComputedStyle(el).display),
+    ).toBe("grid");
+    await page.goto("/?empty");
+    await expect(page.locator(".temple-notice-section")).toHaveCount(0);
+    await fits(page);
+    await context.close();
+  }
+});
 for (const viewport of [
   { width: 320, height: 568 },
   { width: 390, height: 844 },
@@ -70,10 +137,12 @@ for (const viewport of [
     await fixtures(page);
     await page.goto("/");
     // Temple notices must remain visible when common advertising selectors are hidden.
-    await page.addStyleTag({content: '.ad-section, .text-ad { display: none !important; }'});
+    await page.addStyleTag({
+      content: ".ad-section, .text-ad { display: none !important; }",
+    });
     await expect(page.getByText("9999", { exact: true })).toBeVisible();
-    await expect(page.locator('.temple-notice-section')).toBeVisible();
-    await expect(page.locator('.temple-notice-content h2')).toBeVisible();
+    await expect(page.locator(".temple-notice-section")).toBeVisible();
+    await expect(page.locator(".temple-notice-content h2")).toBeVisible();
     await fits(page);
     const number = await page.locator(".number-section").boundingBox();
     const ad = await page.locator(".temple-notice-section").boundingBox();
@@ -84,8 +153,10 @@ for (const viewport of [
     await expect(page.locator(".temple-notice-section")).toHaveCount(0);
     await fits(page);
     await page.goto("/?paused");
-    await expect(page.getByText("මේ දිනවල සෙත් කවි කියන්නේ නොමැති බව කරුණාවෙන් සලකන්න.")).toBeVisible();
-    await expect(page.locator('.public-number')).toHaveCount(0);
+    await expect(
+      page.getByText("මේ දිනවල සෙත් කවි කියන්නේ නොමැති බව කරුණාවෙන් සලකන්න."),
+    ).toBeVisible();
+    await expect(page.locator(".public-number")).toHaveCount(0);
     await fits(page);
     await page.goto("/admin/login");
     await expect(page.locator(".login-card")).toBeVisible();
