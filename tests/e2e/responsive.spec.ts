@@ -93,6 +93,25 @@ test("landscape touch tablets show the number alongside temple information and l
     const logo = (await page.locator(".public-logo").boundingBox())!;
     const number = (await page.locator(".public-number").boundingBox())!;
     const section = (await page.locator(".number-section").boundingBox())!;
+    const caption = (await page.locator(".number-caption").boundingBox())!;
+    const information = (await page
+      .locator(".temple-information")
+      .boundingBox())!;
+    const screen = await page.locator('.public-display').evaluate(el=>({height:el.getBoundingClientRect().height,innerHeight,innerWidth,rows:getComputedStyle(el).gridTemplateRows}));
+    expect(Math.abs(section.height - screen.height * 0.62), JSON.stringify(screen)).toBeLessThan(2);
+    expect(
+      Math.abs(
+        information.y +
+          information.height / 2 -
+          (section.y + section.height / 2),
+      ),
+    ).toBeLessThan(2);
+    expect(
+      Math.abs(
+        (logo.y + caption.y + caption.height) / 2 -
+          (information.y + information.height / 2),
+      ),
+    ).toBeLessThan(2);
     const noticeBox = (await page
       .locator(".temple-notice-section")
       .boundingBox())!;

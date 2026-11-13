@@ -46,13 +46,16 @@ export default function PublicDisplay() {
   return (
     <main className={`public-display ${ad ? "has-notice" : ""}`}>
       <section className="number-section">
-        <img
-          className="public-logo"
-          src="/temple-emblem-transparent.png"
-          alt="පතිරාජ මන්තින්දාරාම විහාරයේ ලාංඡනය"
-        />
-        <h1 className="temple-name">පතිරාජ මන්තින්දාරාම විහාරය</h1>
-        <p className="eyebrow">දැන් කැඳවන අංකය</p>
+        <div className="temple-information">
+          <img
+            className="public-logo"
+            src="/temple-emblem-transparent.png"
+            alt="පතිරාජ මන්තින්දාරාම විහාරයේ ලාංඡනය"
+          />
+          <h1 className="temple-name">පතිරාජ මන්තින්දාරාම විහාරය</h1>
+          <p className="eyebrow">දැන් කැඳවන අංකය</p>
+          <p className="number-caption">සෙත් කවි කියවීමේ අංකය</p>
+        </div>
         <div
           className="public-number"
           key={state.current_number}
@@ -60,7 +63,6 @@ export default function PublicDisplay() {
         >
           {formatNumber(state.current_number)}
         </div>
-        <p className="number-caption">සෙත් කවි කියවීමේ අංකය</p>
       </section>
       {ad && (
         <section className="temple-notice-section" aria-label="නිවේදනය">
