@@ -17,7 +17,7 @@ export function AdContent({ ad }: { ad: PublicAd }) {
       />
     )
   ) : (
-    <div className="text-ad">
+    <div className="temple-notice-content">
       <h2>{ad.heading}</h2>
       <p>{ad.message}</p>
     </div>
@@ -44,7 +44,7 @@ export default function PublicDisplay() {
       </main>
     );
   return (
-    <main className={`public-display ${ad ? "has-ad" : ""}`}>
+    <main className={`public-display ${ad ? "has-notice" : ""}`}>
       <section className="number-section">
         <img
           className="public-logo"
@@ -63,7 +63,7 @@ export default function PublicDisplay() {
         <p className="number-caption">සෙත් කවි කියවීමේ අංකය</p>
       </section>
       {ad && (
-        <section className="ad-section" aria-label="නිවේදනය">
+        <section className="temple-notice-section" aria-label="නිවේදනය">
           <AdContent key={`${ad.id}-${ad.image_url}`} ad={ad} />
         </section>
       )}

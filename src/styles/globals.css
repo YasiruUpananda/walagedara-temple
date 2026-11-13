@@ -688,7 +688,7 @@ fieldset {
   font-size: 13px;
   margin-top: 8px;
 }
-.text-ad {
+.temple-notice-content {
   overflow-wrap: anywhere;
   max-width: 100%;
   white-space: pre-wrap;
@@ -787,8 +787,8 @@ fieldset {
   background: #fff;
   position: relative;
 }
-.public-display.has-ad {
-  grid-template-rows: minmax(0, 70fr) minmax(0, 30fr);
+.public-display.has-notice {
+  grid-template-rows: minmax(0, 75fr) minmax(0, 25fr);
 }
 .number-section {
   display: flex;
@@ -804,7 +804,7 @@ fieldset {
   letter-spacing: 0.26em;
 }
 .public-number {
-  font-size: clamp(100px, min(24vw, 30vh), 350px);
+  font-size: clamp(120px, min(28vw, 40vh), 480px);
   line-height: 1.05;
   font-weight: 750;
   color: #a62212;
@@ -812,8 +812,8 @@ fieldset {
   font-variant-numeric: tabular-nums;
   animation: appear 0.22s ease-out;
 }
-.has-ad .public-number {
-  font-size: clamp(80px, min(24vw, 30vh), 350px);
+.has-notice .public-number {
+  font-size: clamp(100px, min(28vw, 32vh), 420px);
 }
 .number-caption {
   font-size: clamp(10px, 1.5vh, 18px);
@@ -822,7 +822,7 @@ fieldset {
   text-transform: uppercase;
   margin-top: 1vh;
 }
-.ad-section {
+.temple-notice-section {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -834,18 +834,18 @@ fieldset {
   text-align: center;
   animation: appear 0.4s;
 }
-.ad-section img {
+.temple-notice-section img {
   height: 100%;
   width: 100%;
   object-fit: contain;
   min-height: 0;
 }
-.ad-section h2 {
+.temple-notice-section h2 {
   font-size: clamp(18px, 2.8vh, 36px);
   line-height: 1.25;
   color: #0f172a;
 }
-.ad-section p {
+.temple-notice-section p {
   font-size: clamp(12px, 1.9vh, 24px);
   line-height: 1.5;
   margin-top: 2vh;
@@ -963,22 +963,22 @@ fieldset {
   .login-card {
     padding: 27px;
   }
-  .public-display.has-ad {
+  .public-display.has-notice {
     min-height: 100dvh;
     height: auto;
     grid-template-rows: minmax(70dvh, auto) minmax(30dvh, auto);
   }
-  .ad-section {
+  .temple-notice-section {
     overflow: visible;
   }
-  .ad-section img {
+  .temple-notice-section img {
     max-height: 26dvh;
   }
   .public-number {
-    font-size: clamp(80px, 25vw, 180px);
+    font-size: clamp(88px, 28vw, 220px);
   }
-  .has-ad .public-number {
-    font-size: clamp(80px, 25vw, 180px);
+  .has-notice .public-number {
+    font-size: clamp(88px, 28vw, 220px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1002,7 +1002,7 @@ fieldset {
 .number-section .eyebrow {
   color: #347b19;
 }
-.ad-section {
+.temple-notice-section {
   border-top: 3px solid #e6a515;
 }
 
@@ -1034,8 +1034,8 @@ h2 {
 .public-logo {
   height: clamp(112px, 24vh, 300px);
 }
-.has-ad .public-number {
-  font-size: clamp(80px, min(24vw, 26vh), 300px);
+.has-notice .public-number {
+  font-size: clamp(100px, min(28vw, 32vh), 420px);
 }
 .number-caption {
   text-align: center;
@@ -1121,10 +1121,10 @@ h2 {
   .admin-nav > div {
     gap: 16px;
   }
-  .has-ad .public-number {
-    font-size: clamp(80px, 25vw, 180px);
+  .has-notice .public-number {
+    font-size: clamp(88px, 28vw, 220px);
   }
-  .public-display.has-ad {
+  .public-display.has-notice {
     grid-template-rows: minmax(70dvh, auto) minmax(30dvh, auto);
   }
   .admin-shell,
@@ -1278,17 +1278,17 @@ h2 {
   .number-section .eyebrow {
     font-size: 15px;
   }
-  .ad-section {
+  .temple-notice-section {
     padding: 20px 16px;
   }
-  .ad-section p {
+  .temple-notice-section p {
     font-size: 15px;
     margin-top: 10px;
   }
-  .ad-section h2 {
+  .temple-notice-section h2 {
     line-height: 1.6;
   }
-  .ad-section img {
+  .temple-notice-section img {
     height: auto;
     max-height: 26dvh;
   }
@@ -1303,7 +1303,7 @@ h2 {
 /* Small landscape screens must scroll instead of clipping the logo or Sinhala text. */
 @media (max-height: 600px) and (max-width: 1000px) and (orientation: landscape) {
   .public-display,
-  .public-display.has-ad {
+  .public-display.has-notice {
     height: auto;
     min-height: 100dvh;
     grid-template-rows: auto;
@@ -1320,14 +1320,14 @@ h2 {
     font-size: 18px;
   }
   .public-number,
-  .has-ad .public-number {
-    font-size: 90px;
+  .has-notice .public-number {
+    font-size: 110px;
   }
-  .ad-section {
+  .temple-notice-section {
     min-height: 30dvh;
     overflow: visible;
   }
-  .ad-section img {
+  .temple-notice-section img {
     height: auto;
     max-height: 35dvh;
   }

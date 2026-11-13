@@ -69,15 +69,19 @@ for (const viewport of [
     await page.setViewportSize(viewport);
     await fixtures(page);
     await page.goto("/");
+    // Temple notices must remain visible when common advertising selectors are hidden.
+    await page.addStyleTag({content: '.ad-section, .text-ad { display: none !important; }'});
     await expect(page.getByText("9999", { exact: true })).toBeVisible();
+    await expect(page.locator('.temple-notice-section')).toBeVisible();
+    await expect(page.locator('.temple-notice-content h2')).toBeVisible();
     await fits(page);
     const number = await page.locator(".number-section").boundingBox();
-    const ad = await page.locator(".ad-section").boundingBox();
+    const ad = await page.locator(".temple-notice-section").boundingBox();
     expect(ad!.y).toBeGreaterThanOrEqual(number!.y + number!.height - 1);
     const logo = await page.locator(".public-logo").boundingBox();
     expect(logo!.y).toBeGreaterThanOrEqual(0);
     await page.goto("/?empty");
-    await expect(page.locator(".ad-section")).toHaveCount(0);
+    await expect(page.locator(".temple-notice-section")).toHaveCount(0);
     await fits(page);
     await page.goto("/?paused");
     await expect(page.getByText("මේ දිනවල සෙත් කවි කියන්නේ නොමැති බව කරුණාවෙන් සලකන්න.")).toBeVisible();

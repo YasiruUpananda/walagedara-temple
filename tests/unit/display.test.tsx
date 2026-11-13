@@ -110,13 +110,13 @@ describe("public state", () => {
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
     expect(screen.queryByRole("button")).toBeNull();
-    expect(document.querySelector(".public-display")).toHaveClass("has-ad");
+    expect(document.querySelector(".public-display")).toHaveClass("has-notice");
   });
   it("removes the lower section when no ads exist", () => {
     mockDisplay.state = state(2);
     render(<PublicDisplay />);
     expect(screen.queryByLabelText("නිවේදනය")).toBeNull();
-    expect(document.querySelector(".public-display")).not.toHaveClass("has-ad");
+    expect(document.querySelector(".public-display")).not.toHaveClass("has-notice");
   });
   it("renders a recovery screen before first data", () => {
     mockDisplay.state = null;

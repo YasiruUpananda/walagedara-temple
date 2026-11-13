@@ -60,7 +60,7 @@ test.describe("real backend and separate devices", () => {
     await page.getByRole("button", { name: "නිවේදනය සුරකින්න" }).click();
     await expect(tv.getByText("Please have a seat")).toBeVisible();
     const number = await tv.locator(".number-section").boundingBox();
-    const ad = await tv.locator(".ad-section").boundingBox();
+    const ad = await tv.locator(".temple-notice-section").boundingBox();
     expect(ad!.y).toBeGreaterThanOrEqual(number!.y + number!.height - 1);
     await page
       .getByRole("button", { name: `සංස්කරණය කරන්න: ${title}`, exact: true })
@@ -126,8 +126,8 @@ test.describe("real backend and separate devices", () => {
     await page.getByRole("link", { name: "නිවේදන", exact: true }).click();
     await page.getByRole("switch", { name: `සක්‍රිය කරන්න: ${title}` }).click();
     await expect(tv.getByText("Please have a seat")).toHaveCount(0);
-    await expect(tv.locator(".ad-section")).toHaveCount(0);
-    await expect(tv.locator(".public-display")).not.toHaveClass(/has-ad/);
+    await expect(tv.locator(".temple-notice-section")).toHaveCount(0);
+    await expect(tv.locator(".public-display")).not.toHaveClass(/has-notice/);
     await page
       .getByRole("button", { name: `මකන්න: ${title}`, exact: true })
       .click();
