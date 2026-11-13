@@ -837,7 +837,7 @@ fieldset {
   border-top: 1px solid #e9e1d3;
   padding: 2vh 5vw;
   min-height: 0;
-  overflow: hidden;
+  overflow-y: auto;
   background: #fffcf5;
   text-align: center;
   animation: appear 0.4s;
@@ -849,16 +849,19 @@ fieldset {
   min-height: 0;
 }
 .temple-notice-section h2 {
-  font-size: clamp(18px, 2.8vh, 36px);
-  line-height: 1.25;
+  font-size: clamp(28px, 4vh, 52px);
+  line-height: 1.5;
   color: #0f172a;
 }
 .temple-notice-section p {
-  font-size: clamp(12px, 1.9vh, 24px);
-  line-height: 1.5;
+  font-size: clamp(22px, 2.8vh, 36px);
+  line-height: 1.6;
   margin-top: 2vh;
   color: #475569;
   max-width: 1250px;
+}
+.temple-notice-section .temple-notice-content {
+  margin-block: auto;
 }
 .connection-warning {
   position: absolute;
@@ -1291,10 +1294,11 @@ h2 {
     padding: 20px 16px;
   }
   .temple-notice-section p {
-    font-size: 15px;
+    font-size: clamp(20px, 4.5vw, 24px);
     margin-top: 10px;
   }
   .temple-notice-section h2 {
+    font-size: clamp(24px, 5.5vw, 32px);
     line-height: 1.6;
   }
   .temple-notice-section img {
@@ -1439,11 +1443,11 @@ h2 {
     margin-block: auto;
   }
   .temple-notice-section h2 {
-    font-size: clamp(28px, 3vw, 40px);
+    font-size: clamp(34px, 3.8vw, 52px);
     line-height: 1.5;
   }
   .temple-notice-section p {
-    font-size: clamp(22px, 2.4vw, 32px);
+    font-size: clamp(28px, 3vw, 40px);
     line-height: 1.6;
     margin-top: 10px;
   }
