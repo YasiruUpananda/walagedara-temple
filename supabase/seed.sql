@@ -1,0 +1,2 @@
+-- Deliberately empty. Production starts at 000 with no advertisements.
+-- Provision test users via the local dashboard, then insert their UUIDs into admin_users.
